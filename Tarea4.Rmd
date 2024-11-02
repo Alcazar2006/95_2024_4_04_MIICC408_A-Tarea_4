@@ -1,0 +1,84 @@
+```{r}
+library(arules)
+library(dplyr)
+library(ggplot2)
+
+data = read.csv('C:\\Users\\dalca\\Downloads\\db_csv_\\db_csv_\\MIGRACION_BDP.csv', sep=',')
+
+reglas= apriori(data, parameter = list(support = 0.2, confidence = 0.5) )
+reglasframe <- as(reglas, "data.frame")
+
+inspect(reglas[0:100])
+
+
+cluster <- kmeans(data, centers=3)
+
+ggplot(data, aes(x = COD_MUNICIPIO, y = PEI4, color = as.factor(cluster$cluster)))+
+  geom_point()+
+  geom_point(data = as.data.frame(cluster$centers), aes(x=COD_MUNICIPIO, y = PEI4), color = "black", size=4, shape=17)+
+  labs(title = "COD_MUNICIPIO vs EDAD")+
+  theme_minimal()
+
+ggplot(data, aes(x = MUNICIPIO, y = PEI3, color = as.factor(cluster$cluster)))+
+  geom_point()+
+  geom_point(data = as.data.frame(cluster$centers), aes(x=MUNICIPIO, y = PEI3), color = "black", size=4, shape=17)+
+  labs(title = "MUNICIPIO vs Sexo")+
+  theme_minimal()
+
+ggplot(data, aes(x = PEI4, y = PEI5, color = as.factor(cluster$cluster)))+
+  geom_point()+
+  geom_point(data = as.data.frame(cluster$centers), aes(x=PEI4, y = PEI5), color = "black", size=4, shape=17)+
+  labs(title = "Edad vs Año")+
+  theme_minimal()
+
+
+
+
+
+
+ggplot(data, aes(x = COD_MUNICIPIO, y = PEI5, color = as.factor(cluster$cluster)))+
+  geom_point()+
+  geom_point(data = as.data.frame(cluster$centers), aes(x=COD_MUNICIPIO, y = PEI5), color = "black", size=4, shape=17)+
+  labs(title = "COD_MUNICIPIO vs EDAD")+
+  theme_minimal()
+
+
+ggplot(data, aes(x = DEPARTAMENTO, y = PEI5, color = as.factor(cluster$cluster)))+
+  geom_point()+
+  geom_point(data = as.data.frame(cluster$centers), aes(x=DEPARTAMENTO, y = PEI5), color = "black", size=4, shape=17)+
+  labs(title = "COD_MUNICIPIO vs EDAD")+
+  theme_minimal()
+
+
+ggplot(data, aes(x = PEI5, y = DEPARTAMENTO, color = as.factor(cluster$cluster)))+
+  geom_point()+
+  geom_point(data = as.data.frame(cluster$centers), aes(x=PEI5, y = DEPARTAMENTO), color = "black", size=4, shape=17)+
+  labs(title = "PEI5 vs DEPARTAMENTO")+
+  theme_minimal()
+#
+ggplot(data, aes(x = PEI4, y = PEI3, color = as.factor(cluster$cluster)))+
+  geom_point()+
+  geom_point(data = as.data.frame(cluster$centers), aes(x=PEI4, y = PEI3), color = "black", size=4, shape=17)+
+  labs(title = "PEI4 vs PEI3")+
+  theme_minimal()
+
+ggplot(data, aes(x = COD_MUNICIPIO, y = PEI3, color = as.factor(cluster$cluster)))+
+  geom_point()+
+  geom_point(data = as.data.frame(cluster$centers), aes(x=COD_MUNICIPIO, y = PEI3), color = "black", size=4, shape=17)+
+  labs(title = "COD_MUNICIPIO vs Sexo")+
+  theme_minimal()
+
+ggplot(data, aes(x = COD_MUNICIPIO, y = PEI4, color = as.factor(cluster$cluster)))+
+  geom_point()+
+  geom_point(data = as.data.frame(cluster$centers), aes(x=COD_MUNICIPIO, y = PEI4), color = "black", size=4, shape=17)+
+  labs(title = "COD_MUNICIPIO vs EDAD")+
+  theme_minimal()
+
+ggplot(data, aes(x = PEI3, y = PEI5, color = as.factor(cluster$cluster)))+
+  geom_point()+
+  geom_point(data = as.data.frame(cluster$centers), aes(x=PEI3, y = PEI5), color = "black", size=4, shape=17)+
+  labs(title = "PEI4 vs EDAD")+
+  theme_minimal()
+
+```
+
